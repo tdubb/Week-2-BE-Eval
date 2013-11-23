@@ -31,13 +31,112 @@ describe Tennis::Game do
   end
 
   describe '.score' do
-    context 'a player wins forty to love' do
-      it 'displays game: Player1 Bill' do
-      
-        @player1.points = 4
-        @player2.points = 0
+    context 'a player wins to love' do
+      it 'returns game: Player1 Bill' do
+        game.player1.points = 4
+        game.player2.points = 0
 
         expect(game.game_score).to eq ('game: Player1 Bill')
+      end
+      it 'returns game: Player2 Ted' do
+        game.player1.points = 0
+        game.player2.points = 4
+      
+        expect(game.game_score).to eq ('game: Player2 Ted')
+      end
+    end
+    context 'player1 wins to thirty' do
+      it 'returns game: Player1 Bill' do
+        game.player1.points = 4
+        game.player2.points = 2
+
+        expect(game.game_score).to eq ('game: Player1 Bill')
+      end
+    end
+    context 'player2 wins to fifteen' do
+      it 'returns game: Player2 Ted' do
+        game.player1.points = 1
+        game.player2.points = 4
+      
+        expect(game.game_score).to eq ('game: Player2 Ted')
+      end
+    end
+
+    context 'when one player has the advantage' do
+      it 'returns advantage Player 1' do
+        game.player1.points = 4
+        game.player2.points = 3
+
+        expect(game.game_score).to eq ('advantage: Player1 Bill')      
+      end
+      it 'returns advantage Player 2' do
+        game.player1.points = 5
+        game.player2.points = 6
+
+        expect(game.game_score).to eq ('advantage: Player2 Ted')      
+      end
+    end
+
+    context 'when the score is tied at deuce' do
+      it 'return deuce' do
+        game.player1.points = 4
+        game.player2.points = 4
+
+        expect(game.game_score).to eq ('deuce')
+      end
+    end
+
+    context 'when the score is tied' do
+      it 'returns "love all"' do
+        game.player1.points = 0
+        game.player2.points = 0
+
+        expect(game.game_score).to eq ('love all')
+      end
+      it 'returns "fifteen all"' do
+        game.player1.points = 1
+        game.player2.points = 1
+
+        expect(game.game_score).to eq ('fifteen all')
+      end
+      it 'returns "thirty all"' do
+        game.player1.points = 2
+        game.player2.points = 2
+
+        expect(game.game_score).to eq ('thirty all')
+      end
+    end
+
+    context  'when one player is ahead of the other' do
+      it 'returns 15 love' do
+        game.player1.points = 1
+        game.player2.points = 0
+
+        expect(game.game_score).to eq ('fifteen: love')
+      end
+      it 'returns love fifteen' do
+        game.player1.points = 0
+        game.player2.points = 1
+
+        expect(game.game_score).to eq ('love: fifteen')
+      end
+      it 'returns thirty love' do
+        game.player1.points = 2
+        game.player2.points = 0
+
+        expect(game.game_score).to eq ('thirty: love')
+      end
+      it 'returns love forty' do
+        game.player1.points = 0
+        game.player2.points = 3
+
+        expect(game.game_score).to eq ('love: forty')
+      end
+      it 'returns thirty forty' do
+        game.player1.points = 2
+        game.player2.points = 3
+
+        expect(game.game_score).to eq ('thirty: forty')
       end
     end
   end

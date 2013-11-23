@@ -34,17 +34,17 @@ module Tennis
     def game_score
     
       if (@player1.points > 3 || @player2.points > 3) && (@player2.points - @player1.points > 1 || @player1.points - @player2.points > 1)
-        puts "#{@player1.score}"
-      elsif (@player1.points >= 3 || @player2.points >= 3) && (@player2.points - @player1.points == 1 || @player1.points - @player2.points == 1)
-        puts "#{@player1.score}"
-      elsif @player1.points == 3 && @player2.points == 3
-        puts "#{@player1.score}"
+        return "#{@player1.score}"
+      elsif (@player1.points >= 3 && @player2.points >= 3) && (@player2.points - @player1.points == 1 || @player1.points - @player2.points == 1)
+        return "#{@player1.score}"
+      elsif @player1.points >= 3 && @player2.points - @player1.points == 0
+        return "#{@player1.score}"
       elsif @player1.points == @player2.points && @player1.points < 3 
-        puts "#{@player1.score} all"
+        return "#{@player1.score} all"
       elsif @player1.points != @player2.points && @player1.points <= 3 && @player2.points <= 3 
-        puts "#{@player1.score}: #{@player2.score}"
+        return "#{@player1.score}: #{@player2.score}"
       else
-        puts "this is an unfamiliar scoring situation"
+        return "this is an unfamiliar scoring situation"
       end
     end
   end
@@ -73,9 +73,11 @@ module Tennis
     # Returns the String score for the player.
     # This handles deuce advantage and winning the game
     def score
+      unless self.opponent.points > 3 
       return 'love' if @points == 0
       return 'fifteen' if @points == 1
       return 'thirty' if @points == 2
+      end
       if @points == 3 && (self.opponent.points < 3)
         return 'forty' 
       elsif @points - self.opponent.points == 0 
@@ -84,7 +86,7 @@ module Tennis
         return "advantage: #{self.name}"
       elsif self.opponent.points - @points == 1
         return "advantage: #{self.opponent.name}"
-      elsif @points - self.opponent.points == 2
+      elsif @points - self.opponent.points >= 2
         return "game: #{self.name}"
       else 
         return "game: #{self.opponent.name}"
