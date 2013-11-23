@@ -10,154 +10,181 @@ describe Tennis::Match do
   let(:match) { Tennis::Match.new}
 
   describe '.initialize' do
+    it 'creates 5 sets' do
+      expect(match.set1).to be_a(Tennis::Set)
+      expect(match.set2).to be_a(Tennis::Set)
+      expect(match.set3).to be_a(Tennis::Set)
+      expect(match.set4).to be_a(Tennis::Set)
+      expect(match.set5).to be_a(Tennis::Set)
+    end
+  end
+
+  describe '#match_score' do
+    it 'returns the score of a match' do
+      match.set1.set_winner = 'Player1 Bill'
+      match.set2.set_winner = 'Player2 Ted'
+      match.set3.set_winner
+      match.set4.set_winner
+      match.set5.set_winner
+
+      expect(match.match_score).to eq("Player1 Bill set 1, Player2 Ted set 2, undetermined set 3, undetermined set 4, undetermined set 5.")
+    end
+  end
+end
+
+describe Tennis::Set do
+  let(:set) { Tennis::Set.new}
+
+  describe '.initialize' do
     it 'creates 13 games' do
-      expect(match.game1).to be_a(Tennis::Game)
-      expect(match.game2).to be_a(Tennis::Game)
-      expect(match.game3).to be_a(Tennis::Game)
-      expect(match.game4).to be_a(Tennis::Game)
-      expect(match.game5).to be_a(Tennis::Game)
-      expect(match.game6).to be_a(Tennis::Game)
-      expect(match.game7).to be_a(Tennis::Game)
-      expect(match.game8).to be_a(Tennis::Game)
-      expect(match.game9).to be_a(Tennis::Game)
-      expect(match.game10).to be_a(Tennis::Game)
-      expect(match.game11).to be_a(Tennis::Game)
-      expect(match.game12).to be_a(Tennis::Game)
-      expect(match.game13).to be_a(Tennis::Game)
+      expect(set.game1).to be_a(Tennis::Game)
+      expect(set.game2).to be_a(Tennis::Game)
+      expect(set.game3).to be_a(Tennis::Game)
+      expect(set.game4).to be_a(Tennis::Game)
+      expect(set.game5).to be_a(Tennis::Game)
+      expect(set.game6).to be_a(Tennis::Game)
+      expect(set.game7).to be_a(Tennis::Game)
+      expect(set.game8).to be_a(Tennis::Game)
+      expect(set.game9).to be_a(Tennis::Game)
+      expect(set.game10).to be_a(Tennis::Game)
+      expect(set.game11).to be_a(Tennis::Game)
+      expect(set.game12).to be_a(Tennis::Game)
+      expect(set.game13).to be_a(Tennis::Game)
     end
   end
 
   describe '#wins_game1' do
     it 'returns the winner of the game' do
-      match.game1.player1.points = 4
-      match.game1.player2.points = 0
+      set.game1.player1.points = 4
+      set.game1.player2.points = 0
 
-      expect(match.wins_game1).to eq ('game: Player1 Bill') 
+      expect(set.wins_game1).to eq ('game: Player1 Bill') 
     end
     it 'returns game not over' do
-      match.game1.player1.points = 2
-      match.game1.player2.points = 3
+      set.game1.player1.points = 2
+      set.game1.player2.points = 3
 
-      expect(match.wins_game1).to eq ('game not over') 
+      expect(set.wins_game1).to eq ('game not over') 
     end
   end
 
   describe '#playerx_game_won' do
     it 'returns player1 with 1 game won' do
-      match.game1.player1.points = 4
-      match.game1.player2.points = 0
-      match.wins_game1
+      set.game1.player1.points = 4
+      set.game1.player2.points = 0
+      set.wins_game1
 
-      expect(match.player1_games_won).to eq (1)
+      expect(set.player1_games_won).to eq (1)
     end 
     it 'returns player 2 with 2 and player1 with 0 games won' do
-      match.game1.player1.points = 2
-      match.game1.player2.points = 4
-      match.wins_game1
-      match.game2.player1.points = 4
-      match.game2.player2.points = 6
-      match.wins_game2
+      set.game1.player1.points = 2
+      set.game1.player2.points = 4
+      set.wins_game1
+      set.game2.player1.points = 4
+      set.game2.player2.points = 6
+      set.wins_game2
 
 
-      expect(match.player2_games_won).to eq (2)
-      expect(match.player1_games_won).to eq (0)
+      expect(set.player2_games_won).to eq (2)
+      expect(set.player1_games_won).to eq (0)
     end
   end
 
   describe '#match_score' do
     context 'one player is ahead' do
       it 'returns player1 score then player2 score' do
-        match.game1.player1.points = 2
-        match.game1.player2.points = 4
-        match.wins_game1
-        match.game2.player1.points = 8
-        match.game2.player2.points = 6
-        match.wins_game2
-        match.game3.player1.points = 4
-        match.game3.player2.points = 6
-        match.wins_game3
+        set.game1.player1.points = 2
+        set.game1.player2.points = 4
+        set.wins_game1
+        set.game2.player1.points = 8
+        set.game2.player2.points = 6
+        set.wins_game2
+        set.game3.player1.points = 4
+        set.game3.player2.points = 6
+        set.wins_game3
 
-        expect(match.match_score).to eq ('1 games to 2')
+        expect(set.set_score).to eq ('1 games to 2')
       end
     end
 
     context 'one player wins 6 to 3' do
-      it 'returns winning player wins the match' do
-        match.game1.player1.points = 2
-        match.game1.player2.points = 4
-        match.wins_game1
-        match.game2.player1.points = 8
-        match.game2.player2.points = 6
-        match.wins_game2
-        match.game3.player1.points = 4
-        match.game3.player2.points = 6
-        match.wins_game3
-        match.game4.player1.points = 2
-        match.game4.player2.points = 4
-        match.wins_game4
-        match.game5.player1.points = 8
-        match.game5.player2.points = 6
-        match.wins_game5
-        match.game6.player1.points = 4
-        match.game6.player2.points = 6
-        match.wins_game6
-        match.game7.player1.points = 2
-        match.game7.player2.points = 4
-        match.wins_game7
-        match.game8.player1.points = 8
-        match.game8.player2.points = 6
-        match.wins_game8
-        match.game9.player1.points = 4
-        match.game9.player2.points = 6
-        match.wins_game9
+      it 'returns winning player wins the set' do
+        set.game1.player1.points = 2
+        set.game1.player2.points = 4
+        set.wins_game1
+        set.game2.player1.points = 8
+        set.game2.player2.points = 6
+        set.wins_game2
+        set.game3.player1.points = 4
+        set.game3.player2.points = 6
+        set.wins_game3
+        set.game4.player1.points = 2
+        set.game4.player2.points = 4
+        set.wins_game4
+        set.game5.player1.points = 8
+        set.game5.player2.points = 6
+        set.wins_game5
+        set.game6.player1.points = 4
+        set.game6.player2.points = 6
+        set.wins_game6
+        set.game7.player1.points = 2
+        set.game7.player2.points = 4
+        set.wins_game7
+        set.game8.player1.points = 8
+        set.game8.player2.points = 6
+        set.wins_game8
+        set.game9.player1.points = 4
+        set.game9.player2.points = 6
+        set.wins_game9
 
-        expect(match.match_score).to eq('Player2 Ted wins the match 6 games to 3')
+        expect(set.set_score).to eq('Player2 Ted wins the set 6 games to 3')
+        expect(set.set_winner).to eq('Player2 Ted')
       end
     end
 
     context 'one player wins 7 to 6 ' do
-      it 'returns winning player wins the match' do
-        match.game1.player1.points = 6
-        match.game1.player2.points = 4
-        match.wins_game1
-        match.game2.player1.points = 8
-        match.game2.player2.points = 6
-        match.wins_game2
-        match.game3.player1.points = 4
-        match.game3.player2.points = 6
-        match.wins_game3
-        match.game4.player1.points = 2
-        match.game4.player2.points = 4
-        match.wins_game4
-        match.game5.player1.points = 4
-        match.game5.player2.points = 2
-        match.wins_game5
-        match.game6.player1.points = 4
-        match.game6.player2.points = 6
-        match.wins_game6
-        match.game7.player1.points = 2
-        match.game7.player2.points = 4
-        match.wins_game7
-        match.game8.player1.points = 8
-        match.game8.player2.points = 6
-        match.wins_game8
-        match.game9.player1.points = 4
-        match.game9.player2.points = 6
-        match.wins_game9
-        match.game10.player1.points = 4
-        match.game10.player2.points = 2
-        match.wins_game10
-        match.game11.player1.points = 8
-        match.game11.player2.points = 6
-        match.wins_game11
-        match.game12.player1.points = 4
-        match.game12.player2.points = 6
-        match.wins_game12
-        match.game13.player1.points = 8
-        match.game13.player2.points = 6
-        match.wins_game13
+      it 'returns winning player wins the set' do
+        set.game1.player1.points = 6
+        set.game1.player2.points = 4
+        set.wins_game1
+        set.game2.player1.points = 8
+        set.game2.player2.points = 6
+        set.wins_game2
+        set.game3.player1.points = 4
+        set.game3.player2.points = 6
+        set.wins_game3
+        set.game4.player1.points = 2
+        set.game4.player2.points = 4
+        set.wins_game4
+        set.game5.player1.points = 4
+        set.game5.player2.points = 2
+        set.wins_game5
+        set.game6.player1.points = 4
+        set.game6.player2.points = 6
+        set.wins_game6
+        set.game7.player1.points = 2
+        set.game7.player2.points = 4
+        set.wins_game7
+        set.game8.player1.points = 8
+        set.game8.player2.points = 6
+        set.wins_game8
+        set.game9.player1.points = 4
+        set.game9.player2.points = 6
+        set.wins_game9
+        set.game10.player1.points = 4
+        set.game10.player2.points = 2
+        set.wins_game10
+        set.game11.player1.points = 8
+        set.game11.player2.points = 6
+        set.wins_game11
+        set.game12.player1.points = 4
+        set.game12.player2.points = 6
+        set.wins_game12
+        set.game13.player1.points = 8
+        set.game13.player2.points = 6
+        set.wins_game13
 
-        expect(match.match_score).to eq('Player1 Bill wins the match 7 games to 6')
+        expect(set.set_score).to eq('Player1 Bill wins the set 7 games to 6')
       end
     end
   end

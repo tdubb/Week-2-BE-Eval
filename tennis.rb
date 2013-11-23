@@ -1,6 +1,25 @@
 module Tennis
   class Match
-    attr_accessor :game1, :game2, :game3, :game4, :game5, :game6, :game7, :game8, :game9, :game10, :game11, :game12, :game13, :player1_games_won, :player2_games_won
+    attr_accessor :set1, :set2, :set3, :set4, :set5
+
+    def initialize
+      @set1 = Set.new
+      @set2 = Set.new
+      @set3 = Set.new
+      @set4 = Set.new
+      @set5 = Set.new
+    end
+
+    def match_score
+      return "#{@set1.set_winner} set 1, #{@set2.set_winner} set 2, #{@set3.set_winner} set 3, #{@set4.set_winner} set 4, #{@set5.set_winner} set 5."
+    end
+
+
+  end
+  
+
+  class Set
+    attr_accessor :game1, :game2, :game3, :game4, :game5, :game6, :game7, :game8, :game9, :game10, :game11, :game12, :game13, :player1_games_won, :player2_games_won, :set_winner
     
     def initialize
       @game1 = Game.new
@@ -18,6 +37,7 @@ module Tennis
       @game13 = Game.new
       @player1_games_won = 0
       @player2_games_won = 0
+      @set_winner = "undetermined"
     end
 
     def wins_game1 
@@ -176,18 +196,22 @@ module Tennis
       end
     end
 
-    def match_score
+    def set_score
       unless self.player1_games_won >= 6 || self.player2_games_won >= 6
       return "#{self.player1_games_won} games to #{self.player2_games_won}"
       end
       if self.player1_games_won == 6 && self.player2_games_won <= 4
-        return "#{game1.player1.name} wins the match #{self.player1_games_won} games to #{self.player2_games_won}" 
+        @set_winner = "#{game1.player1.name}"
+        return "#{game1.player1.name} wins the set #{self.player1_games_won} games to #{self.player2_games_won}" 
       elsif self.player2_games_won == 6 && self.player1_games_won <= 4
-        return "#{game2.player2.name} wins the match #{self.player2_games_won} games to #{self.player1_games_won}"
+        @set_winner = "#{game1.player2.name}"
+        return "#{game1.player2.name} wins the set #{self.player2_games_won} games to #{self.player1_games_won}"
       elsif self.player1_games_won == 7
-        return "#{game1.player1.name} wins the match #{self.player1_games_won} games to #{self.player2_games_won}"
+        @set_winner = "#{game1.player1.name}"
+        return "#{game1.player1.name} wins the set #{self.player1_games_won} games to #{self.player2_games_won}"
       else self.player2_games_won == 7
-        "#{game2.player1.name} wins the match #{self.player2_games_won} games to #{self.player1_games_won}"
+        @set_winner = "#{game1.player2.name}"
+        return "#{game1.player2.name} wins the set #{self.player2_games_won} games to #{self.player1_games_won}"
       end
     end
 
