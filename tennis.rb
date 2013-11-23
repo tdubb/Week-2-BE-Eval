@@ -1,4 +1,201 @@
 module Tennis
+  class Match
+    attr_accessor :game1, :game2, :game3, :game4, :game5, :game6, :game7, :game8, :game9, :game10, :game11, :game12, :game13, :player1_games_won, :player2_games_won
+    
+    def initialize
+      @game1 = Game.new
+      @game2 = Game.new
+      @game3 = Game.new
+      @game4 = Game.new
+      @game5 = Game.new
+      @game6 = Game.new
+      @game7 = Game.new
+      @game8 = Game.new
+      @game9 = Game.new
+      @game10 = Game.new
+      @game11 = Game.new
+      @game12 = Game.new
+      @game13 = Game.new
+      @player1_games_won = 0
+      @player2_games_won = 0
+    end
+
+    def wins_game1 
+      if self.game1.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game1.game_score
+      elsif self.game1.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game1.game_score
+      else
+        return "game not over"
+      end
+    end
+
+    def wins_game2 
+      if self.game2.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game2.game_score
+      elsif self.game2.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game2.game_score
+      else
+        return "game not over"
+      end
+    end
+
+     def wins_game3 
+      if self.game3.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game3.game_score
+      elsif self.game3.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game3.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def 
+
+      wins_game4 
+      if self.game4.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game4.game_score
+      elsif self.game4.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game4.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game5 
+      if self.game5.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game5.game_score
+      elsif self.game5.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game5.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game6 
+      if self.game6.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game6.game_score
+      elsif self.game6.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game6.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game7 
+      if self.game7.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game7.game_score
+      elsif self.game7.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game7.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game8 
+      if self.game8.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game8.game_score
+      elsif self.game8.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game8.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game9 
+      if self.game9.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game9.game_score
+      elsif self.game9.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game9.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game10 
+      if self.game10.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game10.game_score
+      elsif self.game10.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game10.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game11 
+      if self.game11.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game11.game_score
+      elsif self.game11.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game11.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game12 
+      if self.game12.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game12.game_score
+      elsif self.game12.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game12.game_score
+      else
+        return "game not over"
+      end
+    end 
+
+    def wins_game13 
+      if self.game13.game_score == "game: Player1 Bill"
+        @player1_games_won += 1
+        return self.game13.game_score
+      elsif self.game13.game_score == "game: Player2 Ted"
+        @player2_games_won += 1
+        return self.game13.game_score
+      else
+        return "game not over"
+      end
+    end
+
+    def match_score
+      unless self.player1_games_won >= 6 || self.player2_games_won >= 6
+      return "#{self.player1_games_won} games to #{self.player2_games_won}"
+      end
+      if self.player1_games_won == 6 && self.player2_games_won <= 4
+        return "#{game1.player1.name} wins the match #{self.player1_games_won} games to #{self.player2_games_won}" 
+      elsif self.player2_games_won == 6 && self.player1_games_won <= 4
+        return "#{game2.player2.name} wins the match #{self.player2_games_won} games to #{self.player1_games_won}"
+      elsif self.player1_games_won == 7
+        return "#{game1.player1.name} wins the match #{self.player1_games_won} games to #{self.player2_games_won}"
+      else self.player2_games_won == 7
+        "#{game2.player1.name} wins the match #{self.player2_games_won} games to #{self.player1_games_won}"
+      end
+    end
+
+
+  end
+
   class Game
     attr_accessor :player1, :player2, :score
 

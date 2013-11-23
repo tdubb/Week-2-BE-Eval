@@ -6,6 +6,164 @@ require 'rspec'
 
 require_relative '../tennis'
 
+describe Tennis::Match do
+  let(:match) { Tennis::Match.new}
+
+  describe '.initialize' do
+    it 'creates 13 games' do
+      expect(match.game1).to be_a(Tennis::Game)
+      expect(match.game2).to be_a(Tennis::Game)
+      expect(match.game3).to be_a(Tennis::Game)
+      expect(match.game4).to be_a(Tennis::Game)
+      expect(match.game5).to be_a(Tennis::Game)
+      expect(match.game6).to be_a(Tennis::Game)
+      expect(match.game7).to be_a(Tennis::Game)
+      expect(match.game8).to be_a(Tennis::Game)
+      expect(match.game9).to be_a(Tennis::Game)
+      expect(match.game10).to be_a(Tennis::Game)
+      expect(match.game11).to be_a(Tennis::Game)
+      expect(match.game12).to be_a(Tennis::Game)
+      expect(match.game13).to be_a(Tennis::Game)
+    end
+  end
+
+  describe '#wins_game1' do
+    it 'returns the winner of the game' do
+      match.game1.player1.points = 4
+      match.game1.player2.points = 0
+
+      expect(match.wins_game1).to eq ('game: Player1 Bill') 
+    end
+    it 'returns game not over' do
+      match.game1.player1.points = 2
+      match.game1.player2.points = 3
+
+      expect(match.wins_game1).to eq ('game not over') 
+    end
+  end
+
+  describe '#playerx_game_won' do
+    it 'returns player1 with 1 game won' do
+      match.game1.player1.points = 4
+      match.game1.player2.points = 0
+      match.wins_game1
+
+      expect(match.player1_games_won).to eq (1)
+    end 
+    it 'returns player 2 with 2 and player1 with 0 games won' do
+      match.game1.player1.points = 2
+      match.game1.player2.points = 4
+      match.wins_game1
+      match.game2.player1.points = 4
+      match.game2.player2.points = 6
+      match.wins_game2
+
+
+      expect(match.player2_games_won).to eq (2)
+      expect(match.player1_games_won).to eq (0)
+    end
+  end
+
+  describe '#match_score' do
+    context 'one player is ahead' do
+      it 'returns player1 score then player2 score' do
+        match.game1.player1.points = 2
+        match.game1.player2.points = 4
+        match.wins_game1
+        match.game2.player1.points = 8
+        match.game2.player2.points = 6
+        match.wins_game2
+        match.game3.player1.points = 4
+        match.game3.player2.points = 6
+        match.wins_game3
+
+        expect(match.match_score).to eq ('1 games to 2')
+      end
+    end
+
+    context 'one player wins 6 to 3' do
+      it 'returns winning player wins the match' do
+        match.game1.player1.points = 2
+        match.game1.player2.points = 4
+        match.wins_game1
+        match.game2.player1.points = 8
+        match.game2.player2.points = 6
+        match.wins_game2
+        match.game3.player1.points = 4
+        match.game3.player2.points = 6
+        match.wins_game3
+        match.game4.player1.points = 2
+        match.game4.player2.points = 4
+        match.wins_game4
+        match.game5.player1.points = 8
+        match.game5.player2.points = 6
+        match.wins_game5
+        match.game6.player1.points = 4
+        match.game6.player2.points = 6
+        match.wins_game6
+        match.game7.player1.points = 2
+        match.game7.player2.points = 4
+        match.wins_game7
+        match.game8.player1.points = 8
+        match.game8.player2.points = 6
+        match.wins_game8
+        match.game9.player1.points = 4
+        match.game9.player2.points = 6
+        match.wins_game9
+
+        expect(match.match_score).to eq('Player2 Ted wins the match 6 games to 3')
+      end
+    end
+
+    context 'one player wins 7 to 6 ' do
+      it 'returns winning player wins the match' do
+        match.game1.player1.points = 6
+        match.game1.player2.points = 4
+        match.wins_game1
+        match.game2.player1.points = 8
+        match.game2.player2.points = 6
+        match.wins_game2
+        match.game3.player1.points = 4
+        match.game3.player2.points = 6
+        match.wins_game3
+        match.game4.player1.points = 2
+        match.game4.player2.points = 4
+        match.wins_game4
+        match.game5.player1.points = 4
+        match.game5.player2.points = 2
+        match.wins_game5
+        match.game6.player1.points = 4
+        match.game6.player2.points = 6
+        match.wins_game6
+        match.game7.player1.points = 2
+        match.game7.player2.points = 4
+        match.wins_game7
+        match.game8.player1.points = 8
+        match.game8.player2.points = 6
+        match.wins_game8
+        match.game9.player1.points = 4
+        match.game9.player2.points = 6
+        match.wins_game9
+        match.game10.player1.points = 4
+        match.game10.player2.points = 2
+        match.wins_game10
+        match.game11.player1.points = 8
+        match.game11.player2.points = 6
+        match.wins_game11
+        match.game12.player1.points = 4
+        match.game12.player2.points = 6
+        match.wins_game12
+        match.game13.player1.points = 8
+        match.game13.player2.points = 6
+        match.wins_game13
+
+        expect(match.match_score).to eq('Player1 Bill wins the match 7 games to 6')
+      end
+    end
+  end
+end  
+
+
 describe Tennis::Game do
   let(:game) { Tennis::Game.new }
 
