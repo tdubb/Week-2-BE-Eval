@@ -56,9 +56,7 @@ module Tennis
       end
     end 
 
-    def 
-
-      wins_game4 
+    def wins_game4 
       if self.game4.game_score == "game: Player1 Bill"
         @player1_games_won += 1
         return self.game4.game_score
