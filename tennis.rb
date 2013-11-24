@@ -11,8 +11,191 @@ module Tennis
     end
 
     def match_score
-      return "#{@set1.set_winner} set 1, #{@set2.set_winner} set 2, #{@set3.set_winner} set 3, #{@set4.set_winner} set 4, #{@set5.set_winner} set 5."
+      puts "#{@set1.set_winner} set 1, #{@set2.set_winner} set 2, #{@set3.set_winner} set 3, #{@set4.set_winner} set 4, #{@set5.set_winner} set 5."
     end
+
+    def game1_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game1.player1.record_won_ball!
+      else
+        self.set1.game1.player2.record_won_ball!
+      end
+      puts self.set1.game1.game_score
+    end
+
+    def play_game1
+        until self.set1.game1.game_score === "game: Player1 Bill" || self.set1.game1.game_score === "game: Player2 Ted" 
+          self.game1_play_point 
+        end
+    end
+
+    def game2_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game2.player1.record_won_ball!
+      else
+        self.set1.game2.player2.record_won_ball!
+      end
+      puts self.set1.game2.game_score
+    end
+
+    def play_game2
+        until self.set1.game2.game_score === "game: Player1 Bill" || self.set1.game2.game_score === "game: Player2 Ted" 
+          self.game2_play_point 
+        end
+    end
+
+    def game3_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game3.player1.record_won_ball!
+      else
+        self.set1.game3.player2.record_won_ball!
+      end
+      puts self.set1.game3.game_score
+    end
+
+    def play_game3
+        until self.set1.game3.game_score === "game: Player1 Bill" || self.set1.game3.game_score === "game: Player2 Ted" 
+          self.game3_play_point 
+        end
+    end
+
+    def game4_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game4.player1.record_won_ball!
+      else
+        self.set1.game4.player2.record_won_ball!
+      end
+      puts self.set1.game4.game_score
+    end
+
+    def play_game4
+        until self.set1.game4.game_score === "game: Player1 Bill" || self.set1.game4.game_score === "game: Player2 Ted" 
+          self.game4_play_point 
+        end
+    end
+
+    def game5_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game5.player1.record_won_ball!
+      else
+        self.set1.game5.player2.record_won_ball!
+      end
+      puts self.set1.game5.game_score
+    end
+
+    def play_game5
+        until self.set1.game5.game_score === "game: Player1 Bill" || self.set1.game5.game_score === "game: Player2 Ted" 
+          self.game5_play_point 
+        end
+    end
+
+    def game6_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game6.player1.record_won_ball!
+      else
+        self.set1.game6.player2.record_won_ball!
+      end
+      puts self.set1.game6.game_score
+    end
+
+    def play_game6
+        until self.set1.game6.game_score === "game: Player1 Bill" || self.set1.game6.game_score === "game: Player2 Ted" 
+          self.game6_play_point 
+        end
+    end
+
+    def game7_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game7.player1.record_won_ball!
+      else
+        self.set1.game7.player2.record_won_ball!
+      end
+      puts self.set1.game7.game_score
+    end
+
+    def play_game7
+        until self.set1.game7.game_score === "game: Player1 Bill" || self.set1.game7.game_score === "game: Player2 Ted" 
+          self.game7_play_point 
+        end
+    end
+
+    def game8_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game8.player1.record_won_ball!
+      else
+        self.set1.game8.player2.record_won_ball!
+      end
+      puts self.set1.game8.game_score
+    end
+
+    def play_game8
+        until self.set1.game8.game_score === "game: Player1 Bill" || self.set1.game8.game_score === "game: Player2 Ted" 
+          self.game8_play_point 
+        end
+    end
+
+    def game9_play_point
+      x = rand(0..1)
+      if x == 1
+        self.set1.game9.player1.record_won_ball!
+      else
+        self.set1.game9.player2.record_won_ball!
+      end
+      puts self.set1.game9.game_score
+    end
+
+    def play_game9
+        until self.set1.game9.game_score === "game: Player1 Bill" || self.set1.game9.game_score === "game: Player2 Ted" 
+          self.game9_play_point 
+        end
+    end
+
+    def play_set
+      puts self.play_game1
+      puts self.set1.wins_game1
+      puts self.set1.set_score
+      puts self.play_game2
+      puts self.set1.wins_game2
+      puts self.set1.set_score
+      puts self.play_game3
+      puts self.set1.wins_game3
+      puts self.set1.set_score
+      puts self.play_game4
+      puts self.set1.wins_game4
+      puts self.set1.set_score
+      puts self.play_game5
+      puts self.set1.wins_game5
+      puts self.set1.set_score
+      puts self.play_game6
+      puts self.set1.wins_game6
+      puts self.set1.set_score
+      if self.set1.player1_games_won < 6 && self.set1.player2_games_won < 6
+      puts self.play_game7
+      puts self.set1.wins_game7
+      puts self.set1.set_score
+      end
+      if self.set1.player1_games_won < 6 && self.set1.player2_games_won < 6
+      puts self.play_game8
+      puts self.set1.wins_game8
+      puts self.set1.set_score
+      end
+      if self.set1.player1_games_won < 6 && self.set1.player2_games_won < 6
+      puts self.play_game9
+      puts self.set1.wins_game9
+      puts self.set1.set_score
+      puts @set_winner
+      end
+    end
+
+
 
 
   end
