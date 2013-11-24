@@ -184,7 +184,7 @@ module Tennis
       puts self.set1.game11.game_score
     end
 
-    def play_game7
+    def play_game11
         until self.set1.game11.game_score === "game: Player1 Bill" || self.set1.game11.game_score === "game: Player2 Ted" 
           self.game11_play_point 
         end
@@ -242,27 +242,27 @@ module Tennis
       puts self.play_game6
       puts self.set1.wins_game6
       puts self.set1.set_score
-      if self.set1.player1_games_won < 6 && self.set1.player2_games_won < 6
+      if self.set1.player1_games_won <= 5 && self.set1.player2_games_won <= 5
         puts self.play_game7
         puts self.set1.wins_game7
         puts self.set1.set_score
         puts @set_winner
-        if self.set1.player1_games_won < 6 && self.set1.player2_games_won < 6
+        if self.set1.player1_games_won <= 5 && self.set1.player2_games_won <= 5
           puts self.play_game8
           puts self.set1.wins_game8
           puts self.set1.set_score
           puts @set_winner
-          if self.set1.player1_games_won < 6 && self.set1.player2_games_won < 6
+          if self.set1.player1_games_won <= 5 && self.set1.player2_games_won <= 5
             puts self.play_game9
             puts self.set1.wins_game9
             puts self.set1.set_score
             puts @set_winner
-            if self.set1.player1_games_won < 7  && self.set1.player2_games_won < 7
+            if self.set1.player1_games_won <= 5 && self.set1.player2_games_won <= 5
               puts self.play_game10
               puts self.set1.wins_game10
               puts self.set1.set_score
               puts @set_winner
-              if self.set1.player1_games_won < 7 && self.set1.player2_games_won < 7 
+              if self.set1.player1_games_won < 6 && self.set1.player2_games_won < 6 
                 puts self.play_game11
                 puts self.set1.wins_game11
                 puts self.set1.set_score
@@ -272,6 +272,12 @@ module Tennis
                   puts self.set1.wins_game12
                   puts self.set1.set_score
                   puts @set_winner
+                  if self.set1.player1_games_won < 7 && self.set1.player2_games_won < 7
+                  puts self.play_game13
+                  puts self.set1.wins_game13
+                  puts self.set1.set_score
+                  puts @set_winner
+                  end
                 end
               end
             end
@@ -483,11 +489,12 @@ module Tennis
           @set_winner = "#{game1.player1.name}"
         end
         return "#{game1.player1.name} wins the set #{self.player1_games_won} games to #{self.player2_games_won}"
-      else self.player2_games_won == 7
+      elsif self.player2_games_won == 7
         if @set_winner == "undetermined"
           @set_winner = "#{game1.player2.name}"
         end
         return "#{game1.player2.name} wins the set #{self.player2_games_won} games to #{self.player1_games_won}"
+      else
       end
     end
 
