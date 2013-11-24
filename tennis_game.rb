@@ -19,7 +19,7 @@ match = Tennis::Match.new
 # 	match.set1.game1.game_score
 # end
 
-match.play_set
+match.play_match
 
 
 
